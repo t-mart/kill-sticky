@@ -14,16 +14,14 @@ I could not agree more.
 
 ## Installation
 
-↓ Drag this link to your bookmark bar ↓
+Make a new bookmark (on your bookmark bar) with the following URL:
 
-<a href="javascript:(function()%7B(function()%7Bvar%20i%2Celements%3Ddocument.querySelectorAll(%22body%20*%22)%3Bfor
-(i%3D0%3Bi%3Celements.length%3Bi%2B%2B)%7Bif(getComputedStyle(elements%5Bi%5D).position%3D%3D%3D%22fixed%22)
-%7Belements%5Bi%5D.parentNode.removeChild(elements%5Bi%5D)%7D%7D%7D)()%3Bdocument.querySelector(%22body%22).style
-.overflow%3D%22visible%22%7D)()%3B%0A"><p style="font-size:xx-large">kill-sticky</p></a>
+    javascript:(function()%7B(function()%7Bvar%20i%2Celements%3Ddocument.querySelectorAll(%22body%20*%22)%3Bfor
+    (i%3D0%3Bi%3Celements.length%3Bi%2B%2B)%7Bif(getComputedStyle(elements%5Bi%5D).position%3D%3D%3D%22fixed%22)
+    %7Belements%5Bi%5D.parentNode.removeChild(elements%5Bi%5D)%7D%7D%7D)()%3Bdocument.querySelector(%22body%22).style
+    .overflow%3D%22visible%22%7D)()%3B%0A
 
-↑ Drag this link to your bookmark bar ↑ 
-
-## New Sticky Trends Disable Scrolling
+## Why a new version?
 McDiarmid's bookmarklet works in most scenarios. He targets the removal of sticky nav elements at the sides of the 
 viewport.
 
