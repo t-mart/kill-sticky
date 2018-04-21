@@ -1,33 +1,40 @@
 # kill-sticky
 
+Bookmarklet to remove sticky elements and restore scrolling to web pages!
+
 ## Background
 
-Alisdair McDiarmid wrote this at his [Kill sticky headers](https://alisdair.mcdiarmid.org/kill-sticky-headers/) 
-bookmarklet page:
-
-> There is currently a trend for using sticky headers on websites. There's even 
-[a sticky header web startup](http://www.hellobar.com/).
+Alisdair McDiarmid wrote at his [Kill sticky headers](https://alisdair.mcdiarmid.org/kill-sticky-headers/) 
+bookmarklet page...
 
 > I hate sticky headers. I want to kill sticky headers.
 
 I could not agree more.
 
+But, while McDiarmid's code has already been immensely helpful to me, I wanted to extend it to also kill of another 
+recent trend: marketing modals. They also abuse `position: fixed` styling and **remove your ability to scroll with 
+`overflow: hidden`**. Not cool, man.
+
+And that's what this extension aims to address:
+- Delete fixed [position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) styled elements
+- Change hidden [overflow](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow) styles to `auto`
+
 ## Installation
 
 Make a new bookmark (on your bookmark bar) with the following URL:
 
-    javascript:(function()%7B(function()%7Bvar%20i%2Celements%3Ddocument.querySelectorAll(%22body%20*%22)%3Bfor
-    (i%3D0%3Bi%3Celements.length%3Bi%2B%2B)%7Bif(getComputedStyle(elements%5Bi%5D).position%3D%3D%3D%22fixed%22)
-    %7Belements%5Bi%5D.parentNode.removeChild(elements%5Bi%5D)%7D%7D%7D)()%3Bdocument.querySelector(%22body%22).style
-    .overflow%3D%22visible%22%7D)()%3B%0A
+```
+javascript:(function()%7B(function()%7Bvar%20i%2Celements%3Ddocument.querySelectorAll(%22*%22)%3Bfor(i%3D0%3Bi%3Celements.length%3Bi%2B%2B)%7Bvar%20computedStyle%3DgetComputedStyle(elements%5Bi%5D)%3Bif(computedStyle.position%3D%3D%3D%22fixed%22)%7Belements%5Bi%5D.parentNode.removeChild(elements%5Bi%5D)%7Dif(computedStyle.overflow%3D%3D%3D%22hidden%22)%7Belements%5Bi%5D.style%5B%22overflow%22%5D%3D%22auto%22%7Dif(computedStyle%5B%22overflow-x%22%5D%3D%3D%3D%22hidden%22)%7Belements%5Bi%5D.style%5B%22overflow-x%22%5D%3D%22auto%22%7Dif(computedStyle%5B%22overflow-y%22%5D%3D%3D%3D%22hidden%22)%7Belements%5Bi%5D.style%5B%22overflow-y%22%5D%3D%22auto%22%7D%7D%7D)()%7D)()%3B%0A
+```
 
-## Why a new version?
-McDiarmid's bookmarklet works in most scenarios. He targets the removal of sticky nav elements at the sides of the 
-viewport.
+![Installation of kill-sticky](out.gif)
 
-But the latest trend I've seen is for websites to pop up sticky modals **and disable scrolling** (usually for 
-promotion when you move your mouse off the page). So, that's why I wrote this kill-sticky: It removes fixed 
-elements **and restores your scrollbar** so you can go back to what you were doing.
+## Usage
+
+Every time you see a bothersome fixed position element and/or loss of scrolling functionality, click the bookmark!
+
+This may break the page sometimes, such as deleting nav or causing scrollbars to show up where they shouldn't. If 
+that happens, just reload the page.
 
 
 ## How the bookmarklet works
@@ -37,16 +44,33 @@ on how fixed elements are removed.
 
 Here, however, is how this bookmarklet restores scrolling
 
-    (function () {
-      // original kill-sticky code 
-      // ...
-      
-      
-      // restore scrolling
-      document.querySelector('body').style.overflow = 'visible';
-    })();
+```javascript
+var i, elements = document.querySelectorAll('*');
 
-## Contributing
+for (i = 0; i < elements.length; i++) {
 
-The only real gotcha here is that we're creating a bookmarklet, so the link created above needs to be minified to a 
-single line and URL encoded. 
+    var computedStyle = getComputedStyle(elements[i]);
+    
+    if (computedStyle.position === 'fixed') {
+       elements[i].parentNode.removeChild(elements[i]);
+    }
+    
+    // restore scrolling
+    if (computedStyle.overflow === 'hidden') {
+       elements[i].style['overflow'] = 'auto';
+    }
+// and do the same for overflow-x and overflow-y
+}
+```
+
+## Building
+
+We're creating a bookmarklet, so our code needs to be minified and URL encoded. 
+
+Run the following the the `src/` directory:
+
+```console
+$ docker build . -t kill-sticky && docker run -i --rm kill-sticky <kill-sticky.js
+```
+    
+_If releasing a new version, paste the output into this `README.md`._
