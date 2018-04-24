@@ -26,7 +26,7 @@ And that's what this extension aims to address:
 Make a new bookmark (on your bookmark bar) with the following URL:
 
 ```
-javascript:(function()%7Bdocument.querySelectorAll(%22body%20*%22).forEach(function(node)%7Bif(getComputedStyle(node).position%3D%3D%3D%22fixed%22)%7Bnode.parentNode.removeChild(node)%7D%7D)%3Bvar%20htmlNode%3Ddocument.querySelector(%22html%22)%3BhtmlNode.style%5B%22overflow%22%5D%3D%22auto%22%3BhtmlNode.style%5B%22overflow-x%22%5D%3D%22auto%22%3BhtmlNode.style%5B%22overflow-y%22%5D%3D%22auto%22%7D)()%3B%0A
+{{ bookmarklet }}
 ```
 
 ![Installation of kill-sticky](docs/bookmark.gif)
@@ -67,4 +67,4 @@ Run the following the project root directory:
 $ docker build . -t kill-sticky && docker run --rm -it -v $(pwd):/kill-sticky kill-sticky
 ```
 
-_This will update the project README.md with the build version._
+This will
