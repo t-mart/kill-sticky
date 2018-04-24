@@ -2,6 +2,7 @@
 
 A bookmarklet to remove sticky elements and restore scrolling to web pages!
 
+## Demo
 ![Demonstration of kill-sticky](docs/demo.gif)
 
 ## Background
