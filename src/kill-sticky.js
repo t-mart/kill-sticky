@@ -1,7 +1,7 @@
 (function () {
 
     document.querySelectorAll('body *').forEach(function(node) {
-        if (getComputedStyle(node).position === 'fixed') {
+        if (['fixed', 'sticky'].includes(getComputedStyle(node).position))  {
             node.parentNode.removeChild(node);
         }
     });
@@ -10,4 +10,5 @@
     htmlNode.style['overflow'] = 'auto';
     htmlNode.style['overflow-x'] = 'auto';
     htmlNode.style['overflow-y'] = 'auto';
+
 })();
