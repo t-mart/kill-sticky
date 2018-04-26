@@ -26,7 +26,7 @@ And that's what this extension aims to address:
 Make a new bookmark (on your bookmark bar) with the following URL:
 
 ```
-javascript:(function()%7Bdocument.querySelectorAll(%22body%20*%22).forEach(function(node)%7Bif(%5B%22fixed%22%2C%22sticky%22%5D.includes(getComputedStyle(node).position))%7Bnode.parentNode.removeChild(node)%7D%7D)%3Bvar%20htmlNode%3Ddocument.querySelector(%22html%22)%3BhtmlNode.style%5B%22overflow%22%5D%3D%22auto%22%3BhtmlNode.style%5B%22overflow-x%22%5D%3D%22auto%22%3BhtmlNode.style%5B%22overflow-y%22%5D%3D%22auto%22%7D)()%3B%0A
+javascript:(function()%7Bdocument.querySelectorAll(%22body%20*%22).forEach(function(node)%7Bif(%5B%22fixed%22%2C%22sticky%22%5D.includes(getComputedStyle(node).position))%7Bnode.parentNode.removeChild(node)%7D%7D)%3Bvar%20htmlNode%3Ddocument.querySelector(%22html%22)%3BhtmlNode.style%5B%22overflow%22%5D%3D%22visible%22%3BhtmlNode.style%5B%22overflow-x%22%5D%3D%22visible%22%3BhtmlNode.style%5B%22overflow-y%22%5D%3D%22visible%22%7D)()%3B%0A
 ```
 
 ![Installation of kill-sticky](docs/bookmark.gif)
@@ -45,16 +45,16 @@ that happens, just reload the page.
 2. Set the style of the `html` node for `overflow: auto`.
 
 ```javascript
-document.querySelectorAll('body *').forEach(function(node) {
-if (getComputedStyle(node).position === 'fixed') {
-node.parentNode.removeChild(node);
-}
-});
+    document.querySelectorAll('body *').forEach(function(node) {
+        if (['fixed', 'sticky'].includes(getComputedStyle(node).position))  {
+            node.parentNode.removeChild(node);
+        }
+    });
 
-var htmlNode = document.querySelector('html');
-htmlNode.style['overflow'] = 'auto';
-htmlNode.style['overflow-x'] = 'auto';
-htmlNode.style['overflow-y'] = 'auto';
+    var htmlNode = document.querySelector('html');
+    htmlNode.style['overflow'] = 'visible';
+    htmlNode.style['overflow-x'] = 'visible';
+    htmlNode.style['overflow-y'] = 'visible';
 ```
 
 ## Building (Only if you want to contribute)

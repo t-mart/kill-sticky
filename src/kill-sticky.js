@@ -7,8 +7,8 @@
     });
 
     var htmlNode = document.querySelector('html');
-    htmlNode.style['overflow'] = 'auto';
-    htmlNode.style['overflow-x'] = 'auto';
-    htmlNode.style['overflow-y'] = 'auto';
+    htmlNode.style['overflow'] = 'visible';
+    htmlNode.style['overflow-x'] = 'visible';
+    htmlNode.style['overflow-y'] = 'visible';
 
 })();

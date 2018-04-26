@@ -45,16 +45,16 @@ that happens, just reload the page.
 2. Set the style of the `html` node for `overflow: auto`.
 
 ```javascript
-document.querySelectorAll('body *').forEach(function(node) {
-if (getComputedStyle(node).position === 'fixed') {
-node.parentNode.removeChild(node);
-}
-});
+    document.querySelectorAll('body *').forEach(function(node) {
+        if (['fixed', 'sticky'].includes(getComputedStyle(node).position))  {
+            node.parentNode.removeChild(node);
+        }
+    });
 
-var htmlNode = document.querySelector('html');
-htmlNode.style['overflow'] = 'auto';
-htmlNode.style['overflow-x'] = 'auto';
-htmlNode.style['overflow-y'] = 'auto';
+    var htmlNode = document.querySelector('html');
+    htmlNode.style['overflow'] = 'visible';
+    htmlNode.style['overflow-x'] = 'visible';
+    htmlNode.style['overflow-y'] = 'visible';
 ```
 
 ## Building (Only if you want to contribute)
