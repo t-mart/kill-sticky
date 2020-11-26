@@ -15,8 +15,8 @@ bookmarklet page...
 I could not agree more.
 
 But, while McDiarmid's code has already been immensely helpful to me, I wanted to extend it to also kill of another 
-                                    recent trend: marketing modals. They also abuse `position: fixed` styling and **remove your ability to scroll with
-                                    `overflow: hidden`**. Not cool, man.
+recent trend: marketing modals. They also abuse `position: fixed` styling and **remove your ability to scroll with
+`overflow: hidden`**. Not cool, man.
 
 And that's what this extension aims to address:
 - Delete fixed [position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) styled elements
