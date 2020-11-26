@@ -27,7 +27,7 @@ And that's what this extension aims to address:
 Make a new bookmark (on your bookmark bar) with the following URL:
 
 ```
-{{ bookmarklet }} 
+{{ bookmarklet }}
 ```
 
 ![Installation of kill-sticky](docs/bookmark.gif)
@@ -50,6 +50,13 @@ that happens, just reload the page.
         if (['fixed', 'sticky'].includes(getComputedStyle(node).position))  {
             node.parentNode.removeChild(node);
         }
+    });
+
+    document.querySelectorAll('html *').forEach(function(node) {
+        var s = getComputedStyle(node);
+        if ('hidden' === s['overflow']) { node.style['overflow'] = 'visible'; }
+        if ('hidden' === s['overflow-x']) { node.style['overflow-x'] = 'visible'; }
+        if ('hidden' === s['overflow-y']) { node.style['overflow-y'] = 'visible'; }
     });
 
     var htmlNode = document.querySelector('html');
