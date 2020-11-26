@@ -15,8 +15,8 @@ bookmarklet page...
 I could not agree more.
 
 But, while McDiarmid's code has already been immensely helpful to me, I wanted to extend it to also kill of another 
-recent trend: marketing modals. They also abuse `position: fixed` styling and **remove your ability to scroll with
-`overflow: hidden`**. Not cool, man.
+                                    recent trend: marketing modals. They also abuse `position: fixed` styling and **remove your ability to scroll with
+                                    `overflow: hidden`**. Not cool, man.
 
 And that's what this extension aims to address:
 - Delete fixed [position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) styled elements
@@ -27,7 +27,7 @@ And that's what this extension aims to address:
 Make a new bookmark (on your bookmark bar) with the following URL:
 
 ```
-javascript:(function()%7Bdocument.querySelectorAll(%22body%20*%22).forEach(function(node)%7Bif(%5B%22fixed%22%2C%22sticky%22%5D.includes(getComputedStyle(node).position))%7Bnode.parentNode.removeChild(node)%7D%7D)%3Bvar%20htmlNode%3Ddocument.querySelector(%22html%22)%3BhtmlNode.style%5B%22overflow%22%5D%3D%22visible%22%3BhtmlNode.style%5B%22overflow-x%22%5D%3D%22visible%22%3BhtmlNode.style%5B%22overflow-y%22%5D%3D%22visible%22%7D)()%3B%0A 
+javascript:(function()%7Bdocument.querySelectorAll(%22body%20*%22).forEach(function(node)%7Bif(%5B%22fixed%22%2C%22sticky%22%5D.includes(getComputedStyle(node).position))%7Bnode.parentNode.removeChild(node)%7D%7D)%3Bdocument.querySelectorAll(%22html%20*%22).forEach(function(node)%7Bvar%20s%3DgetComputedStyle(node)%3Bif(%22hidden%22%3D%3D%3Ds%5B%22overflow%22%5D)%7Bnode.style%5B%22overflow%22%5D%3D%22visible%22%7Dif(%22hidden%22%3D%3D%3Ds%5B%22overflow-x%22%5D)%7Bnode.style%5B%22overflow-x%22%5D%3D%22visible%22%7Dif(%22hidden%22%3D%3D%3Ds%5B%22overflow-y%22%5D)%7Bnode.style%5B%22overflow-y%22%5D%3D%22visible%22%7D%7D)%3Bvar%20htmlNode%3Ddocument.querySelector(%22html%22)%3BhtmlNode.style%5B%22overflow%22%5D%3D%22visible%22%3BhtmlNode.style%5B%22overflow-x%22%5D%3D%22visible%22%3BhtmlNode.style%5B%22overflow-y%22%5D%3D%22visible%22%7D)()%3B%0A
 ```
 
 ![Installation of kill-sticky](docs/bookmark.gif)
@@ -50,6 +50,13 @@ that happens, just reload the page.
         if (['fixed', 'sticky'].includes(getComputedStyle(node).position))  {
             node.parentNode.removeChild(node);
         }
+    });
+
+    document.querySelectorAll('html *').forEach(function(node) {
+        var s = getComputedStyle(node);
+        if ('hidden' === s['overflow']) { node.style['overflow'] = 'visible'; }
+        if ('hidden' === s['overflow-x']) { node.style['overflow-x'] = 'visible'; }
+        if ('hidden' === s['overflow-y']) { node.style['overflow-y'] = 'visible'; }
     });
 
     var htmlNode = document.querySelector('html');
