@@ -72,7 +72,7 @@ We're creating a bookmarklet, so our code needs to be minified and URL encoded.
 Run the following the project root directory:
 
 ```console
-$ docker build . -t kill-sticky && docker run --rm -it -v $(pwd):/kill-sticky kill-sticky
+$ docker build . -t kill-sticky && docker run --rm -it -v $(pwd):/build/kill-sticky kill-sticky
 ```
 
 _This will update the project README.md with the build version._
