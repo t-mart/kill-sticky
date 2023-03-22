@@ -8,14 +8,14 @@
 
     document.querySelectorAll('html *').forEach(function(node) {
         var s = getComputedStyle(node);
-        if ('hidden' === s['overflow']) { node.style['overflow'] = 'visible'; }
-        if ('hidden' === s['overflow-x']) { node.style['overflow-x'] = 'visible'; }
-        if ('hidden' === s['overflow-y']) { node.style['overflow-y'] = 'visible'; }
+        if ('hidden' === s['overflow']) { node.style.setProperty('overflow', 'visible', 'important'); }
+        if ('hidden' === s['overflow-x']) { node.style.setProperty('overflow-x', 'visible', 'important'); }
+        if ('hidden' === s['overflow-y']) { node.style.setProperty('overflow-y', 'visible', 'important'); }
     });
 
     var htmlNode = document.querySelector('html');
-    htmlNode.style['overflow'] = 'visible';
-    htmlNode.style['overflow-x'] = 'visible';
-    htmlNode.style['overflow-y'] = 'visible';
+    htmlNode.style.setProperty('overflow', 'visible', 'important');
+    htmlNode.style.setProperty('overflow-x', 'visible', 'important');
+    htmlNode.style.setProperty('overflow-y', 'visible', 'important');
 
 })();
