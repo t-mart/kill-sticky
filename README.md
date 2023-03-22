@@ -14,13 +14,13 @@ bookmarklet page...
 
 I could not agree more.
 
-But, while McDiarmid's code has already been immensely helpful to me, I wanted to extend it to also kill of another 
+But, while McDiarmid's code has already been immensely helpful to me, I wanted to extend it to also kill off another 
 recent trend: marketing modals. They also abuse `position: fixed` styling and **remove your ability to scroll with
 `overflow: hidden`**. Not cool, man.
 
 And that's what this extension aims to address:
 - Delete fixed [position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) styled elements
-- Change hidden [overflow](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow) styles to `auto`
+- Change hidden [overflow](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow) styles to `visible`
 
 ## Installation
 
@@ -43,7 +43,7 @@ that happens, just reload the page.
 ## How the bookmarklet works
 
 1. Iterate through all child nodes of `body`. Delete the node if it is styled with `position: fixed`.
-2. Set the style of the `html` node for `overflow: auto`.
+2. Set the style of the `html` node for `overflow: visible`.
 
 ```javascript
     document.querySelectorAll('body *').forEach(function(node) {
