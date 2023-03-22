@@ -1,10 +1,11 @@
 FROM node:current-alpine
 
-WORKDIR /kill-sticky
+WORKDIR /build/kill-sticky
 
-RUN set -x \
-        && npm install uglify-js get-stdin mustache -g
+RUN mkdir /build/node_modules \
+        && npm install -g uglify-js mustache \
+        && npm install get-stdin
 
-ENTRYPOINT uglifyjs <src/kill-sticky.js \
-        | NODE_PATH=$(npm root --quiet -g) node src/bookmarkletify.js \
+CMD uglifyjs <src/kill-sticky.js \
+        | node src/bookmarkletify.mjs \
         | mustache - src/README.mustache.md > README.md
